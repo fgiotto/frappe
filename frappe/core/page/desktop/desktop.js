@@ -319,9 +319,6 @@ $.extend(frappe.desktop, {
 					notifier.toggle(sum ? true : false);
 					var circle = notifier.find(".circle-text");
 					var text = sum || '';
-					if(text > 99) {
-						text = '99+';
-					}
 
 					if(circle.length) {
 						circle.html(text);

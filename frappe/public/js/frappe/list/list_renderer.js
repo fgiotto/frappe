@@ -39,6 +39,7 @@ frappe.views.ListRenderer = Class.extend({
 		// default settings
 		this.order_by = this.order_by || 'modified desc';
 		this.filters = this.filters || [];
+		this.or_filters = this.or_filters || [];
 		this.page_length = this.page_length || 20;
 	},
 	setup_cache: function () {
@@ -166,7 +167,7 @@ frappe.views.ListRenderer = Class.extend({
 		var me = this;
 		this.columns = [];
 		var name_column = {
-			colspan: this.settings.colwidths && this.settings.colwidths.subject || 6,
+			colspan: this.settings.colwidths && this.settings.colwidths.subject || 1,
 			type: 'Subject',
 			title: 'Name'
 		};
@@ -178,7 +179,7 @@ frappe.views.ListRenderer = Class.extend({
 		if (frappe.has_indicator(this.doctype)) {
 			// indicator
 			this.columns.push({
-				colspan: this.settings.colwidths && this.settings.colwidths.indicator || 3,
+				colspan: this.settings.colwidths && this.settings.colwidths.indicator || 1,
 				type: 'Indicator',
 				title: 'Status'
 			});
@@ -202,12 +203,12 @@ frappe.views.ListRenderer = Class.extend({
 				});
 
 		docfields_in_list_view.forEach(function (d) {
-			if (overridden.includes(d.fieldname) || d.fieldname === me.title_field) {
-				return;
-			}
-			if (me.total_colspans < 12) {
+			//if (overridden.includes(d.fieldname) || d.fieldname === me.title_field) {
+			//	return;
+			//}
+			//if (me.total_colspans < 20) {
 				me.add_column(d);
-			}
+		//	}
 		});
 
 		// additional columns
@@ -241,26 +242,26 @@ frappe.views.ListRenderer = Class.extend({
 		this.columns = this.columns.uniqBy(col => col.title);
 
 		// Remove TextEditor field columns
-		this.columns = this.columns.filter(col => col.fieldtype !== 'Text Editor');
+		//this.columns = this.columns.filter(col => col.fieldtype !== 'Text Editor');
 
 		// Remove color field
 		this.columns = this.columns.filter(col => col.fieldtype !== 'Color');
 
 		// Limit number of columns to 4
-		this.columns = this.columns.slice(0, 4);
+		//this.columns = this.columns.slice(0, 4);
 	},
 	add_column: function (df) {
 		// field width
-		var colspan = 3;
+		var colspan = 1;
 		if (in_list(['Int', 'Percent'], df.fieldtype)) {
-			colspan = 2;
+			colspan = 1;
 		} else if (in_list(['Check', 'Image'], df.fieldtype)) {
 			colspan = 1;
 		} else if (in_list(['name', 'subject', 'title'], df.fieldname)) {
 			// subjects are longer
-			colspan = 4;
+			colspan = 1;
 		} else if (df.fieldtype == 'Text Editor' || df.fieldtype == 'Text') {
-			colspan = 4;
+			colspan = 1;
 		}
 
 		if (df.columns && df.columns > 0) {
@@ -268,8 +269,9 @@ frappe.views.ListRenderer = Class.extend({
 		} else if (this.settings.column_colspan && this.settings.column_colspan[df.fieldname]) {
 			colspan = this.settings.column_colspan[df.fieldname];
 		} else {
-			colspan = 2;
+			colspan = 1;
 		}
+		colspan = 1;
 		this.total_colspans += parseInt(colspan);
 		var col = {
 			colspan: colspan,
@@ -586,7 +588,7 @@ frappe.views.ListRenderer = Class.extend({
 			// prepare data before rendering view
 			values = values.map(me.prepare_data.bind(this));
 			// remove duplicates
-			// values = values.uniqBy(value => value.name);
+			values = values.uniqBy(value => value.name);
 
 			if (lib_exists) {
 				me.load_lib(function () {

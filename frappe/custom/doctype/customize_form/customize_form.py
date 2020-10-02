@@ -173,10 +173,10 @@ class CustomizeForm(Document):
 					if property == "fieldtype":
 						self.validate_fieldtype_change(df, meta_df[0].get(property), df.get(property))
 
-					elif property == "allow_on_submit" and df.get(property):
-						frappe.msgprint(_("Row {0}: Not allowed to enable Allow on Submit for standard fields")\
-							.format(df.idx))
-						continue
+					#elif property == "allow_on_submit" and df.get(property):
+						#frappe.msgprint(_("Row {0}: Not allowed to enable Allow on Submit for standard fields")\
+							#.format(df.idx))
+						#continue
 					elif property == "in_list_view" and df.get(property) \
 						and df.fieldtype!="Attach Image" and df.fieldtype in no_value_fields:
 								frappe.msgprint(_("'In List View' not allowed for type {0} in row {1}")
