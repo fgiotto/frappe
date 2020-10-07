@@ -99,6 +99,7 @@
     <Content Include="frappe\core\doctype\sms_settings\test_sms_settings.js" />
     <Content Include="frappe\core\doctype\success_action\success_action.js" />
     <Content Include="frappe\core\doctype\system_settings\system_settings.js" />
+    <Content Include="frappe\core\doctype\system_settings\system_settings.json" />
     <Content Include="frappe\core\doctype\system_settings\test_system_settings.js" />
     <Content Include="frappe\core\doctype\tag_category\tag_category.js" />
     <Content Include="frappe\core\doctype\test_runner\test_runner.js" />

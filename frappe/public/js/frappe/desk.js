@@ -415,6 +415,7 @@ frappe.Application = Class.extend({
 				title: __('Session Expired'),
 				keep_open: true,
 				fields: [
+					{ fieldtype: "HTML", options: __("User: <strong>" + frappe.user.full_name() + "</strong>") },
 					{ fieldtype:'Password', fieldname:'password',
 						label: __('Please Enter Your Password to Continue') },
 				],
