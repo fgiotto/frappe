@@ -530,10 +530,10 @@ export default class Grid {
 					df.colsize=df.columns;
 				}
 				else {
-					var colsize = 2;
+					var colsize = 1;
 					switch(df.fieldtype) {
 						case "Text":
-						case "Small Text": colsize = 3; break;
+						case "Small Text": colsize = 2; break;
 						case "Check": colsize = 1;
 					}
 					df.colsize = colsize;
@@ -560,13 +560,13 @@ export default class Grid {
 			for(var i in this.visible_columns) {
 				var df = this.visible_columns[i][0];
 				var colsize = this.visible_columns[i][1];
-				if(colsize > 1 && colsize < 11
-					&& !in_list(frappe.model.std_fields_list, df.fieldname)) {
+				if (colsize >= 1 && colsize < 11
+				) {//&& !in_list(frappe.model.std_fields_list, df.fieldname)) {
 
-					if (passes < 3 && ["Int", "Currency", "Float", "Check", "Percent"].indexOf(df.fieldtype)!==-1) {
+					//if (passes < 3 && ["Int", "Currency", "Float", "Check", "Percent"].indexOf(df.fieldtype)!==-1) {
 						// don't increase col size of these fields in first 3 passes
-						continue;
-					}
+						//continue;
+					//}
 
 					this.visible_columns[i][1] += 1;
 					total_colsize++;

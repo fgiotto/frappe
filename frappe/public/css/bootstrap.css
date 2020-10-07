@@ -1570,14 +1570,14 @@ pre code {
   }
 }
 @media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
+    .container {
+        width: 100%;
+    }
 }
 @media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
+    .container {
+        width: 100%;
+    }
 }
 .container-fluid {
   padding-right: 15px;
